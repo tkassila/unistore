@@ -84,6 +84,8 @@ export default class A extends Component {
      this.setState({ a: change});
      store.setState({ b: items });
   }
+  
+  ....
 }
 
 import ...
@@ -154,7 +156,7 @@ export default class B extends Component {
     store.setState( { c: items });
  }	
 
-	filterA = (channeltype) =>
+	filterB = (channeltype) =>
 	{
      ret = ....
      return ret;
@@ -167,6 +169,7 @@ export default class B extends Component {
      this.setState({ b: change});
      store.setState({ c: items });
   }
+  .....
 }
 
 Somewhere else:
@@ -177,7 +180,7 @@ and in an another place:
 
 this.unsubscribelistener = store.subscribe( listener );
 
-or if you will call store.setState inside of listener: 
+or if you will call store.setState inside of listener, then a must use next kind of subscribe method: 
 
 let listenerobj = {}
 listenerobj.keys = [];
