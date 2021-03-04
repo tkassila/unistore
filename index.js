@@ -45,7 +45,7 @@ export default function createStore(state) {
 	/**
 	 * if a listerner function should to be called {@link setState}
 	 * @name update updated change object
-	 * @name keys defined keys, data attribute names when to receive listener call  
+	 * @name keys defined keys, data attribute names when to receive listener will be called  
 	 */
 
 	function upDateNameIn(update, keys) {
@@ -74,6 +74,8 @@ export default function createStore(state) {
 		return ret;
 	}
 
+	/* A modified setState function: constains added code for conditionally function calls (later for loop).	
+	 */
 	function setState(update, overwrite, action) {
 		state = overwrite ? update : assign(assign({}, state), update);
 		let currentListeners = listeners;
@@ -148,13 +150,12 @@ export default function createStore(state) {
 		 * @param {Ojbect} listenerobj A function to call when state changes.
 		 * Gets passed the new state.
 		 * @returns {Function} unsubscribeStateNameListener()
+		 * @example
 		 * let listenerobj = {}
 		 * listenerobj.keys = [];
 		 * listenerobj.keys.push('fetchitems');
 		 * listenerobj.callfunc = state => this.listenerStoreChange2(state);
-		 * console.log("listenerobj");
-		 * console.log(listenerobj);
-         * this.unsubscribelistener = store.subscribeStateNameListener( listenerobj );
+                 * this.unsubscribelistener = store.subscribeStateNameListener( listenerobj );
 		 */
 		subscribeStateNameListener(listenerobj) {
 			listenersafterspeckeys.push(listenerobj);
