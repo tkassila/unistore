@@ -1,2 +1,2 @@
 # unistore
-A modified version of tiny centralized state container with component bindings for Preact &amp; React.
+A modified version of tiny centralized state container with component bindings for Preact &amp; React. This version is makes possible change store state under listener function by registering only specific named state change. That way is combines automatic code change and user ui controls changes together. A first class a is listening only change named 'a', then second class b is listening step change named 'b' etc. 
