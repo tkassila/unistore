@@ -1,7 +1,7 @@
 # unistore
-A modified version of tiny centralized state container with component bindings for Preact &amp; React. This version is makes possible change store state under listener function by registering only specific named state change. That way is combines automatic code change and user ui controls changes together. 
+A modified version of tiny centralized state container with component bindings for Preact &amp; React. This version is makes possible change store state under listener function without any recursion. It is doing that by registering only specific named state change listener. That way is possible write easy code, that automatic reacts only named data attribute change and same kind of code that also reacts user ui controls changes (react and preact class) on same way. 
 
-By example, a first class A is listening only data change named 'a', then second class B is listening 'step' change named 'b' etc. In first class A store listener function will somehow change data 'a' and then will call store.setState({b: moda}); At last class B has listener which are listen only 'b' named data attribute change. It is important that by example class **B** listener will **not** receive change event calls, when 'c' or 'a' data attribute has been changed! 
+By example, a first class A is listening only data change named 'a', then second class B is listening 'step' change named 'b' etc. In first class A store listener function will somehow change data 'a' and then will call store.setState({b: moda}); At last class B has listener which are listen only 'b' named data attribute change. By calling 'subscribeStateNameListener', class **B** listener will **not** receive change event calls, when 'c' or 'a' data attribute has been changed! Only when 'b' attribute has been changed. 
 
 ```javascript
 import . . .
