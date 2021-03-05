@@ -85,10 +85,10 @@ export default function createStore(state) {
 		}
 
 		for (let k=0; k<listenersafterspeckeys.length; k++)
-		{   
+		{   /*
 			console.log("setState listenersafterspeckeys");
 			console.log(listenersafterspeckeys[k]);
-			
+			*/
 			if (upDateNameIn(update, listenersafterspeckeys[k].keys))
 				listenersafterspeckeys[k].callfunc(state, action);
 	    }
