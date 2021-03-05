@@ -66,7 +66,7 @@ export default function createStore(state) {
 			for (let k=0; k<keys.length; k++)
 			if (key === keys[k])
 			{
-				console.log("ret=true");
+				// console.log("ret=true");
 				ret = true;
 				break;
 			}
