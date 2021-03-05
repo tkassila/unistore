@@ -85,7 +85,9 @@ export default class A extends Component {
   
 //  . . . .
 }
+```
 
+```javascript
 import . . .
 
 export default class B extends Component {
@@ -169,19 +171,19 @@ export default class B extends Component {
   }
  // . . . . .
 }
-....
+```
 
 Somewhere else:
 
 ```javascript
 store.setState({a: 'fddsfsdf'});
----
+```
 
 and in an another place:
 
 ```javascript
 this.unsubscribelistener = store.subscribe( listener );
----
+```
 
 or if you will call store.setState inside of listener, then a must use next kind of subscribe method: 
 
@@ -191,4 +193,5 @@ keys.push('c');
 this.unsubscribelistener = 
    store.subscribeStateNameListener( keys,
    state => this.listenerStoreChange2(state) ); 
----
+   ```
+   
