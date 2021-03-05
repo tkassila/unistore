@@ -3,7 +3,8 @@ A modified version of tiny centralized state container with component bindings f
 
 By example, a first class A is listening only data change named 'a', then second class B is listening 'step' change named 'b' etc. In first class A store listener function will somehow change data 'a' and then will call store.setState({b: moda}); At last class B has listener which are listen only 'b' named data attribute change. It is important that by example class **B** listener will **not** receive 'c' change event calls! 
 
-import ...
+```javascript
+import . . .
 
 export default class A extends Component {
 
@@ -82,10 +83,10 @@ export default class A extends Component {
      store.setState({ b: items });
   }
   
-  ....
+//  . . . .
 }
 
-import ...
+import . . .
 
 export default class B extends Component {
 
@@ -166,21 +167,28 @@ export default class B extends Component {
      this.setState({ b: change});
      store.setState({ c: items });
   }
-  .....
+ // . . . . .
 }
+....
 
 Somewhere else:
 
+```javascript
 store.setState({a: 'fddsfsdf'});
+---
 
 and in an another place:
 
+```javascript
 this.unsubscribelistener = store.subscribe( listener );
+---
 
 or if you will call store.setState inside of listener, then a must use next kind of subscribe method: 
 
+```javascript
 let keys = [];
 keys.push('c');
 this.unsubscribelistener = 
    store.subscribeStateNameListener( keys,
    state => this.listenerStoreChange2(state) ); 
+---
