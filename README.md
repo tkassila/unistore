@@ -110,13 +110,12 @@ export default class B extends Component {
 		if(Config.bDebug) 				
 			console.log("componentDidMount B");
 			
-		let listenerobj = {}
-		listenerobj.keys = [];
-		listenerobj.keys.push('b');
-		listenerobj.callfunc = state => this.listenerStoreChange2(state);
-		console.log("listenerobj");
-		console.log(listenerobj);
-        this.unsubscribelistener = store.subscribeStateNameListener( listenerobj );                
+		let keys = [];
+		keys.push('b');
+		console.log("keys");
+		console.log(keys);
+        this.unsubscribelistener = store.subscribeStateNameListener(keys,
+		  state => this.listenerStoreChange2(state) );                
 	}
 
 	componentWillUnmounted()
@@ -124,7 +123,8 @@ export default class B extends Component {
 		if (this.unsubscribelistener != null)
 			this.unsubscribelistener();
 	}
-   listenerStoreChange2 = (storestate) =>
+
+    listenerStoreChange2 = (storestate) =>
     {
         console.log("B listenerStoreChange2");
         console.log(storestate);
@@ -149,8 +149,8 @@ export default class B extends Component {
 		this.b = b;
 		const items = this.filterB(b);
 		this.items = items;
-    this.setState({ b: b,	});
-    store.setState( { c: items });
+        this.setState({ b: b,	});
+        store.setState( { c: items });
  }	
 
 	filterB = (channeltype) =>
@@ -179,8 +179,8 @@ this.unsubscribelistener = store.subscribe( listener );
 
 or if you will call store.setState inside of listener, then a must use next kind of subscribe method: 
 
-let listenerobj = {}
-listenerobj.keys = [];
-listenerobj.keys.push('c');
-listenerobj.callfunc = state => this.listenerStoreChange2(state);
-this.unsubscribelistener = store.subscribeStateNameListener( listenerobj ); 
+let keys = [];
+keys.push('c');
+this.unsubscribelistener = 
+   store.subscribeStateNameListener( keys,
+   state => this.listenerStoreChange2(state) ); 
