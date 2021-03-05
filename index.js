@@ -85,10 +85,10 @@ export default function createStore(state) {
 		}
 
 		for (let k=0; k<listenersafterspeckeys.length; k++)
-		{   /*
+		{   
 			console.log("setState listenersafterspeckeys");
 			console.log(listenersafterspeckeys[k]);
-			*/
+			
 			if (upDateNameIn(update, listenersafterspeckeys[k].keys))
 				listenersafterspeckeys[k].callfunc(state, action);
 	    }
@@ -147,17 +147,19 @@ export default function createStore(state) {
 		 * be called whenever object 'keys' array contains same attribute key state 
 		 * is changed. Returns an `unsubscribeStateNameListener()` function. A reason for this subribe
 		 * function if there is exists recursive listener call exception!
-		 * @param {Ojbect} listenerobj A function to call when state changes.
+		 * @param {Ojbect} keys A array, which names define state attribute name to be received.
+		 * @param {Function} callfunc A function to call when state changes.
 		 * Gets passed the new state.
 		 * @returns {Function} unsubscribeStateNameListener()
 		 * @example
-		 * let listenerobj = {}
-		 * listenerobj.keys = [];
-		 * listenerobj.keys.push('fetchitems');
-		 * listenerobj.callfunc = state => this.listenerStoreChange2(state);
-                 * this.unsubscribelistener = store.subscribeStateNameListener( listenerobj );
+		 * let keys = [];
+		 * keys.push('fetchitems');
+         * this.unsubscribelistener = store.subscribeStateNameListener( keys, state => this.listenerStoreChange2(state) );
 		 */
-		subscribeStateNameListener(listenerobj) {
+		subscribeStateNameListener(keys, callfunc) {
+			let listenerobj = {}
+		    listenerobj.keys = keys;
+			listenerobj.callfunc = callfunc;
 			listenersafterspeckeys.push(listenerobj);
 			return () => { unsubscribeStateNameListener(listenerobj); };
 		},

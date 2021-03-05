@@ -28,13 +28,10 @@ export default class A extends Component {
 		if(Config.bDebug) 				
 			console.log("componentDidMount A");
 			
-		let listenerobj = {}
-		listenerobj.keys = [];
-		listenerobj.keys.push('a');
-		listenerobj.callfunc = state => this.listenerStoreChange2(state);
-		console.log("listenerobj");
-		console.log(listenerobj);
-        this.unsubscribelistener = store.subscribeStateNameListener( listenerobj );                
+		let keys = [];
+		keys.push('a');
+        this.unsubscribelistener = 
+		   store.subscribeStateNameListener(keys, state => this.listenerStoreChange2(state) );                
 	}
 
 	componentWillUnmounted()
