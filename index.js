@@ -29,7 +29,7 @@ export default function createStore(state) {
 		listeners = out;
 	}
 
-	function unsubscribeStateNameListener(listener) {
+	function unsubscribeAttributeNameListener(listener) {
 		let out = [];
 		for (let i=0; i<listenersafterspeckeys.length; i++) {
 			if (listenersafterspeckeys[i]===listener) {
@@ -145,23 +145,23 @@ export default function createStore(state) {
 		/**
 		 * Register a listener object which 'callfunc' attribute function to 
 		 * be called whenever object 'keys' array contains same attribute key state 
-		 * is changed. Returns an `unsubscribeStateNameListener()` function. A reason for this subribe
+		 * is changed. Returns an `unsubscribeAttributeNameListener()` function. A reason for this subribe
 		 * function if there is exists recursive listener call exception!
 		 * @param {Ojbect} keys A array, which names define state attribute name to be received.
 		 * @param {Function} callfunc A function to call when state changes.
 		 * Gets passed the new state.
-		 * @returns {Function} unsubscribeStateNameListener()
+		 * @returns {Function} unsubscribeAttributeNameListener()
 		 * @example
 		 * let keys = [];
 		 * keys.push('fetchitems');
-         * this.unsubscribelistener = store.subscribeStateNameListener( keys, state => this.listenerStoreChange2(state) );
+         * this.unsubscribelistener = store.subscribeAttributeNameListener( keys, state => this.listenerStoreChange2(state) );
 		 */
-		subscribeStateNameListener(keys, callfunc) {
+		subscribeAttributeNameListener(keys, callfunc) {
 			let listenerobj = {}
 		    listenerobj.keys = keys;
 			listenerobj.callfunc = callfunc;
 			listenersafterspeckeys.push(listenerobj);
-			return () => { unsubscribeStateNameListener(listenerobj); };
+			return () => { unsubscribeAttributeNameListener(listenerobj); };
 		},
 
 		/**
@@ -174,10 +174,10 @@ export default function createStore(state) {
 		/**
 		 * Remove a previously-registered listener function.
 		 * @param {Object} listenerobj	The callback previously passed 
-		 * to `subscribeStateNameListener()` that should be removed.
+		 * to `subscribeAttributeNameListener()` that should be removed.
 		 * @function
 		 */
-		unsubscribeStateNameListener,
+		unsubscribeAttributeNameListener,
 
 		/**
 		 * Retrieve the current state object.

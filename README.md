@@ -32,7 +32,7 @@ export default class A extends Component {
 		let keys = [];
 		keys.push('a');
         this.unsubscribelistener = 
-		   store.subscribeStateNameListener(keys, state => this.listenerStoreChange2(state) );                
+		   store.subscribeAttributeNameListener(keys, state => this.listenerStoreChange2(state) );                
 	}
 
 	componentWillUnmounted()
@@ -117,7 +117,7 @@ export default class B extends Component {
 		keys.push('b');
 		console.log("keys");
 		console.log(keys);
-        this.unsubscribelistener = store.subscribeStateNameListener(keys,
+        this.unsubscribelistener = store.subscribeAttributeNameListener(keys,
 		  state => this.listenerStoreChange2(state) );                
 	}
 
@@ -191,7 +191,7 @@ or if you will call store.setState inside of listener, then a must use next kind
 let keys = [];
 keys.push('c');
 this.unsubscribelistener = 
-   store.subscribeStateNameListener( keys,
+   store.subscribeAttributeNameListener( keys,
    state => this.listenerStoreChange2(state) ); 
    ```
    
