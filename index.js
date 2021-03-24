@@ -94,6 +94,13 @@ export default function createStore(state) {
 	    }
 	}
 
+	/* A modified setState function: does not call any listeners!	
+  	 */
+	function setStateNoneCallListeners(update, overwrite) {
+			state = overwrite ? update : assign(assign({}, state), update);
+	}
+	
+	
 	/**
 	 * An observable state container, returned from {@link createStore}
 	 * @name store
@@ -132,6 +139,13 @@ export default function createStore(state) {
 		 */
 		setState,
 
+		/**
+		 * Apply a partial state object to the current state, with none invoking registered listeners.
+		 * @param {Object} update				An object with properties to be merged into state
+		 * @param {Boolean} [overwrite=false]	If `true`, update will replace state instead of being merged into it
+		 */
+		 setStateNoneCallListeners,
+		 
 		/**
 		 * Register a listener function to be called whenever state is changed. Returns an `unsubscribe()` function.
 		 * @param {Function} listener	A function to call when state changes. Gets passed the new state.
