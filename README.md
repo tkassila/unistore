@@ -3,6 +3,19 @@ A modified version of tiny centralized state container with component bindings f
 
 By example, a first class A is listening only data change named 'a', then second class B is listening 'step' change named 'b' etc. In first class A store listener function will somehow change data 'a' and then will call store.setState({b: moda}); At last class B has listener which are listen only 'b' named data attribute change. By calling 'subscribeAttributeNameListener', class **B** listener will **not** receive change event calls, when 'c' or 'a' data attribute has been changed! Only when 'b' attribute has been changed. 
 
+Example
+
+By example Parent class is fetching json data, class A is Channeltypes, class B is ProgramTypes etc. Attribute change events are coming from Parent fetching class to ui TV Channeltypes (all, free, pay tv channes) instance, and from the Channeltypes to a TV ProgramTypes (movies, sport, all) instance. Each sub classes are filtering data depending of each ui controls. If a user has select some combo value (=subset/all) to be filtered. All these classes has called function 'subscribeAttributeNameListener' in componentDidMount function, like:
+
+```javascript
+let keys = [];
+		keys.push('programtypeitems');
+        this.unsubscribelistener = 
+		    this.store.subscribeAttributeNameListener(keys, state => this.listenerStoreChange2(state) );
+```
+		    
+then function 'listenerStoreChange2' will be called only when 'programtypeitems' has been changed. And this kind of events can changed perhaps under another class store listener event. Those must be called: from a to b, and from b to c etc, not: a -> b -> a !
+
 ```javascript
 import . . .
 
